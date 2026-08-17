@@ -1,0 +1,106 @@
+.form-container {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.15);
+  }
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-card-subtle);
+  padding-bottom: 8px;
+}
+
+.area-grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-glow);
+      background: var(--bg-input-focus);
+    }
+
+    &.invalid {
+      border-color: var(--color-danger);
+      box-shadow: 0 0 0 3px var(--color-danger-bg);
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  .unit {
+    position: absolute;
+    right: 16px;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    pointer-events: none;
+  }
+}
+
+.error-msg {
+  font-size: 0.75rem;
+  color: var(--color-danger-light);
+  margin: 0;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

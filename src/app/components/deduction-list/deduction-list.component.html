@@ -1,0 +1,151 @@
+<div class="deductions-container">
+  <div class="list-section">
+    <h2 class="section-title">Vãos e Recortes (Deduções)</h2>
+    
+    <div class="deductions-list">
+      @if (calculatorService.deductions().length === 0) {
+        <div class="empty-state">
+          <p>Nenhum vão ou recorte deduzido.</p>
+        </div>
+      } @else {
+        <div class="items-grid">
+          @for (item of calculatorService.deductions(); track item.id) {
+            <div class="deduction-card" [class]="item.type">
+              <div class="card-info">
+                <span class="badge" [class]="item.type">
+                  {{ getDeductionLabel(item.type) }}
+                </span>
+                <span class="card-name">{{ item.name }}</span>
+                <span class="card-dim">
+                  {{ item.width }}m x {{ item.length }}m 
+                  (x: {{ item.x }}m, y: {{ item.y }}m)
+                </span>
+                <span class="card-area">
+                  -{{ item.width * item.length | squareMeters }}
+                </span>
+              </div>
+              <button 
+                type="button" 
+                class="btn-delete" 
+                (click)="removeDeduction(item.id)"
+                aria-label="Remover dedução"
+              >
+                &times;
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h3 class="subsection-title">Adicionar Dedução</h3>
+    
+    <form [formGroup]="form" (ngSubmit)="addDeduction()" class="deduction-form">
+      <div class="form-group">
+        <label for="name">Nome / Descrição</label>
+        <input 
+          id="name" 
+          type="text" 
+          formControlName="name" 
+          placeholder="Ex: Porta Banheiro, Janela"
+          [class.invalid]="form.controls.name.touched && form.controls.name.invalid"
+        />
+        @if (form.controls.name.touched && form.controls.name.errors?.['required']) {
+          <p class="error-msg">O nome é obrigatório.</p>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="type">Tipo de Vão</label>
+        <select id="type" formControlName="type">
+          <option value="door">Porta</option>
+          <option value="window">Janela</option>
+          <option value="cutout">Recorte / Outros</option>
+        </select>
+      </div>
+
+      <div class="grid-2-col">
+        <div class="form-group">
+          <label for="d-width">Largura (m)</label>
+          <div class="input-wrapper">
+            <input 
+              id="d-width" 
+              type="number" 
+              formControlName="width" 
+              step="0.1" 
+              [class.invalid]="form.controls.width.touched && form.controls.width.invalid"
+            />
+            <span class="unit">m</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="d-length">Comprimento (m)</label>
+          <div class="input-wrapper">
+            <input 
+              id="d-length" 
+              type="number" 
+              formControlName="length" 
+              step="0.1" 
+              [class.invalid]="form.controls.length.touched && form.controls.length.invalid"
+            />
+            <span class="unit">m</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2-col">
+        <div class="form-group">
+          <label for="d-x">Posição X (m)</label>
+          <div class="input-wrapper">
+            <input 
+              id="d-x" 
+              type="number" 
+              formControlName="x" 
+              step="0.1" 
+              [class.invalid]="form.controls.x.touched && form.controls.x.invalid"
+            />
+            <span class="unit">m</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="d-y">Posição Y (m)</label>
+          <div class="input-wrapper">
+            <input 
+              id="d-y" 
+              type="number" 
+              formControlName="y" 
+              step="0.1" 
+              [class.invalid]="form.controls.y.touched && form.controls.y.invalid"
+            />
+            <span class="unit">m</span>
+          </div>
+        </div>
+      </div>
+
+      @if (form.touched && form.invalid) {
+        <div class="form-errors">
+          @if (form.errors?.['widthExceedsMain']) {
+            <p class="error-msg">A largura excede a largura total ({{ calculatorService.width() }}m).</p>
+          }
+          @if (form.errors?.['lengthExceedsMain']) {
+            <p class="error-msg">O comprimento excede o comprimento total ({{ calculatorService.length() }}m).</p>
+          }
+          @if (form.errors?.['xExceedsMain']) {
+            <p class="error-msg">Largura + Posição X ultrapassam os limites.</p>
+          }
+          @if (form.errors?.['yExceedsMain']) {
+            <p class="error-msg">Comprimento + Posição Y ultrapassam os limites.</p>
+          }
+        </div>
+      }
+
+      <button type="submit" class="btn-submit">
+        Adicionar Dedução
+      </button>
+    </form>
+  </div>
+</div>

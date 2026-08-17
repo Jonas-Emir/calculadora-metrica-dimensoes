@@ -1,0 +1,49 @@
+import { Component, inject, computed } from '@angular/core';
+import { AreaCalculatorService } from '../../services/area-calculator.service';
+import { Deduction } from '../../models/area.model';
+
+@Component({
+  selector: 'app-area-preview',
+  standalone: true,
+  imports: [],
+  templateUrl: './area-preview.component.html',
+  styleUrl: './area-preview.component.scss'
+})
+export class AreaPreviewComponent {
+  protected calculatorService = inject(AreaCalculatorService);
+
+  viewBox = computed(() => {
+    const w = this.calculatorService.width() ?? 0;
+    const l = this.calculatorService.length() ?? 0;
+    const margin = 0.6;
+    return `${-margin} ${-margin} ${w + margin * 2} ${l + margin * 2}`;
+  });
+
+  gridStrokeWidth = computed(() => {
+    const w = this.calculatorService.width() ?? 0;
+    return Math.max(0.01, w * 0.005);
+  });
+
+  fontSize = computed(() => {
+    const w = this.calculatorService.width() ?? 0;
+    return Math.max(0.12, w * 0.04);
+  });
+
+  arrowSize = computed(() => {
+    const w = this.calculatorService.width() ?? 0;
+    return Math.max(0.05, w * 0.015);
+  });
+
+  getDeductionColor(type: string): string {
+    switch (type) {
+      case 'door': return 'var(--color-door)';
+      case 'window': return 'var(--color-window)';
+      case 'cutout': return 'var(--color-cutout)';
+      default: return 'var(--text-secondary)';
+    }
+  }
+
+  getDeductionLabel(d: Deduction): string {
+    return `${d.name} (${d.width}x${d.length}m)`;
+  }
+}
