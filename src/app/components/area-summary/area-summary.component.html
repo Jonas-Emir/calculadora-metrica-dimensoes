@@ -1,0 +1,42 @@
+<div class="summary-container">
+  <h2 class="section-title">Resumo dos Cálculos</h2>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <span class="card-label">Área Bruta</span>
+      <span class="card-value">{{ calculatorService.grossArea() | squareMeters }}</span>
+    </div>
+
+    <div class="summary-card">
+      <span class="card-label">Perímetro</span>
+      <span class="card-value">{{ formatLinearMeters(calculatorService.perimeter()) }}</span>
+    </div>
+
+    <div class="summary-card deduction">
+      <span class="card-label">Deduções de Vãos</span>
+      <span class="card-value">- {{ calculatorService.totalDeductionsArea() | squareMeters }}</span>
+    </div>
+
+    <div class="summary-card success">
+      <span class="card-label">Área Líquida</span>
+      <span class="card-value">{{ calculatorService.netArea() | squareMeters }}</span>
+    </div>
+  </div>
+
+  <div class="total-section">
+    <div class="total-row">
+      <span class="total-label">Margem Adicionada</span>
+      <span class="total-badge">+{{ calculatorService.wasteMargin() }}%</span>
+    </div>
+    <div class="total-highlight">
+      <span class="highlight-label">Total Requerido (m²)</span>
+      <span class="highlight-value">{{ calculatorService.totalAreaWithWaste() | squareMeters }}</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn-reset" (click)="resetAll()">
+      Limpar Tudo
+    </button>
+  </div>
+</div>
