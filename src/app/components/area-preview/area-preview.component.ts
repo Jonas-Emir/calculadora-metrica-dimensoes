@@ -36,10 +36,10 @@ export class AreaPreviewComponent {
 
   getDeductionColor(type: string): string {
     switch (type) {
-      case 'door': return '#f59e0b';
-      case 'window': return '#3b82f6';
-      case 'cutout': return '#ec4899';
-      default: return '#9ca3af';
+      case 'door': return 'var(--color-door)';
+      case 'window': return 'var(--color-window)';
+      case 'cutout': return 'var(--color-cutout)';
+      default: return 'var(--text-secondary)';
     }
   }
 

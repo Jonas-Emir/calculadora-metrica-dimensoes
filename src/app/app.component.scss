@@ -2,13 +2,13 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
-  color: #f3f4f6;
+  background: var(--bg-app);
+  color: var(--text-primary);
   padding: 0 16px;
 }
 
 .app-header {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-card-subtle);
   padding: 20px 0;
   margin-bottom: 32px;
 }
@@ -31,29 +31,29 @@
   .logo-icon {
     width: 36px;
     height: 36px;
-    color: #818cf8;
+    color: var(--color-primary-light);
   }
 
   h1 {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
-    background: linear-gradient(to right, #ffffff, #a5b4fc);
+    background: linear-gradient(to right, var(--text-light), var(--color-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   p {
     font-size: 0.85rem;
-    color: #9ca3af;
+    color: var(--text-secondary);
     margin: 4px 0 0 0;
   }
 }
 
 .badge-tech {
-  background: rgba(99, 102, 241, 0.1);
+  background: var(--color-primary-glow);
   border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #a5b4fc;
+  color: var(--color-purple);
   padding: 6px 12px;
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -100,9 +100,9 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-card-subtle);
   padding: 20px 0;
   text-align: center;
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 0.8rem;
 }

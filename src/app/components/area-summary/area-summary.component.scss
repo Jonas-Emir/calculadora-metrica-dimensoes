@@ -1,9 +1,9 @@
 .summary-container {
   display: flex;
   flex-direction: column;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-card);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-card);
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
@@ -14,8 +14,8 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #f3f4f6;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-card-subtle);
   padding-bottom: 8px;
 }
 
@@ -35,33 +35,33 @@
   flex-direction: column;
   gap: 6px;
   padding: 16px;
-  background: rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-card-dark);
+  border: 1px solid var(--border-card-subtle);
   border-radius: 10px;
 
   .card-label {
     font-size: 0.8rem;
     font-weight: 500;
-    color: #9ca3af;
+    color: var(--text-secondary);
   }
 
   .card-value {
     font-size: 1.15rem;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--text-light);
   }
 
   &.deduction .card-value {
-    color: #f87171;
+    color: var(--color-danger-light);
   }
 
   &.success .card-value {
-    color: #34d399;
+    color: var(--color-success);
   }
 }
 
 .total-section {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  background: linear-gradient(135deg, var(--color-primary-glow) 0%, rgba(139, 92, 246, 0.15) 100%);
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 12px;
   padding: 20px;
@@ -81,12 +81,12 @@
 .total-label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #c084fc;
+  color: var(--color-purple-dark);
 }
 
 .total-badge {
-  background: rgba(192, 132, 252, 0.2);
-  color: #e9d5ff;
+  background: var(--color-purple-bg);
+  color: var(--color-purple-light);
   padding: 2px 8px;
   border-radius: 9999px;
   font-size: 0.75rem;
@@ -101,14 +101,14 @@
 
 .highlight-label {
   font-size: 0.9rem;
-  color: #a5b4fc;
+  color: var(--color-purple);
   font-weight: 500;
 }
 
 .highlight-value {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(to right, #818cf8, #c084fc);
+  background: linear-gradient(to right, var(--color-primary-light), var(--color-purple-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -121,18 +121,18 @@
 .btn-reset {
   padding: 10px 20px;
   background: transparent;
-  border: 1px solid rgba(239, 68, 68, 0.4);
+  border: 1px solid var(--border-danger);
   border-radius: 6px;
-  color: #f87171;
+  color: var(--color-danger-light);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(239, 68, 68, 0.1);
-    border-color: #ef4444;
-    color: #ef4444;
+    background: var(--color-danger-bg);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
   }
 
   &:active {
