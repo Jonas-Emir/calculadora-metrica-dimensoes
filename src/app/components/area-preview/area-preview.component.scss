@@ -82,3 +82,27 @@
   user-select: none;
   font-family: inherit;
 }
+
+.empty-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 24px;
+
+  .empty-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--text-muted);
+  }
+
+  p {
+    font-size: 0.9rem;
+    max-width: 280px;
+    margin: 0;
+    line-height: 1.4;
+  }
+}

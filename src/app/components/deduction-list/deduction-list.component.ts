@@ -62,8 +62,8 @@ export class DeductionListComponent {
       const x = control.get('x')?.value ?? 0;
       const y = control.get('y')?.value ?? 0;
 
-      const mainW = this.calculatorService.width();
-      const mainL = this.calculatorService.length();
+      const mainW = this.calculatorService.width() ?? 0;
+      const mainL = this.calculatorService.length() ?? 0;
 
       const errors: ValidationErrors = {};
 

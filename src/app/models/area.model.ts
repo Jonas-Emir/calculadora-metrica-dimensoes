@@ -11,8 +11,8 @@ export interface Deduction {
 }
 
 export interface AreaState {
-  width: number;
-  length: number;
+  width: number | null;
+  length: number | null;
   deductions: Deduction[];
-  wasteMargin: number;
+  wasteMargin: number | null;
 }

@@ -116,6 +116,8 @@
 .actions {
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .btn-reset {
@@ -137,5 +139,52 @@
 
   &:active {
     transform: scale(0.98);
+  }
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #25d366;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+
+  &:hover:not(:disabled) {
+    background: #20ba5a;
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    background: var(--bg-input-focus);
+    border: 1px solid var(--border-card-subtle);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.5;
+    
+    .whatsapp-icon {
+      color: var(--text-muted);
+    }
+  }
+
+  .whatsapp-icon {
+    width: 16px;
+    height: 16px;
+    color: #ffffff;
+    transition: color 0.2s ease;
   }
 }

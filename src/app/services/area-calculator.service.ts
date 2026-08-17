@@ -8,14 +8,22 @@ import { SessionStorageService } from './session-storage.service';
 export class AreaCalculatorService {
   private readonly STORAGE_KEY = 'area_calculator_state';
 
-  width = signal<number>(5);
-  length = signal<number>(4);
+  width = signal<number | null>(null);
+  length = signal<number | null>(null);
   deductions = signal<Deduction[]>([]);
-  wasteMargin = signal<number>(10);
+  wasteMargin = signal<number | null>(null);
 
-  grossArea = computed(() => this.width() * this.length());
+  grossArea = computed(() => {
+    const w = this.width();
+    const l = this.length();
+    return w !== null && l !== null ? w * l : 0;
+  });
 
-  perimeter = computed(() => 2 * (this.width() + this.length()));
+  perimeter = computed(() => {
+    const w = this.width();
+    const l = this.length();
+    return w !== null && l !== null ? 2 * (w + l) : 0;
+  });
 
   totalDeductionsArea = computed(() =>
     this.deductions().reduce((sum, d) => sum + (d.width * d.length), 0)
@@ -25,9 +33,11 @@ export class AreaCalculatorService {
     Math.max(0, this.grossArea() - this.totalDeductionsArea())
   );
 
-  totalAreaWithWaste = computed(() =>
-    this.netArea() * (1 + this.wasteMargin() / 100)
-  );
+  totalAreaWithWaste = computed(() => {
+    const net = this.netArea();
+    const waste = this.wasteMargin() ?? 0;
+    return net * (1 + waste / 100);
+  });
 
   constructor(private sessionStorage: SessionStorageService) {
     const saved = this.sessionStorage.getItem<AreaState>(this.STORAGE_KEY);
@@ -49,13 +59,13 @@ export class AreaCalculatorService {
     });
   }
 
-  updateDimensions(width: number, length: number): void {
+  updateDimensions(width: number | null, length: number | null): void {
     this.width.set(width);
     this.length.set(length);
     this.validateAndAdjustDeductions();
   }
 
-  updateWasteMargin(margin: number): void {
+  updateWasteMargin(margin: number | null): void {
     this.wasteMargin.set(margin);
   }
 
@@ -76,15 +86,15 @@ export class AreaCalculatorService {
   }
 
   reset(): void {
-    this.width.set(5);
-    this.length.set(4);
+    this.width.set(null);
+    this.length.set(null);
     this.deductions.set([]);
-    this.wasteMargin.set(10);
+    this.wasteMargin.set(null);
   }
 
   private validateAndAdjustDeductions(): void {
-    const currentWidth = this.width();
-    const currentLength = this.length();
+    const currentWidth = this.width() ?? 0;
+    const currentLength = this.length() ?? 0;
     
     this.deductions.update(list => 
       list.filter(d => d.width <= currentWidth && d.length <= currentLength)
